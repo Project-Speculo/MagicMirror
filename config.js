@@ -40,10 +40,10 @@ let config = {
 		{
 			module: "alert",
 		},
-		{
+		/*{
 			module: "updatenotification",
 			position: "top_bar"
-		},
+		},*/
 		{
 			module: "clock",
 			position: "middle_center"
@@ -81,12 +81,15 @@ let config = {
 		  configDeepMerge: true,
 		  config: {
 			stopCommand: "stop",
-			otherStopCommands: ["no", "annuler", "quiet"],
+			otherStopCommands: ["no", "cancel", "quiet", "no thank you", "nah fam"],
 			assistantConfig: {
 			  lang: "en-US",
 			  latitude: 43.897095,
 			  longitude: -78.865791,
 			},
+			recipes: [
+				"EXT-Spotify.js", "EXT-Selfies.js"
+			],
 			website: {
 			  username: "admin",
 			  password: "admin",
@@ -96,17 +99,22 @@ let config = {
 		},
 		{
 		  module: "EXT-Detector",
-		  position: "top_left",
+		  position: "top_right",
 		  config: {
 			debug: false,
-			porcupineAccessKey: null,
-			porcupineCustomModel: null,
+			porcupineAccessKey: "XoMhym37htyKo1V5e+v8/04fNVRIfhDD8aS+ziierU7MKd6tYkyf3g==",
+			porcupineCustomModel: "wakeword_mm.ppn",
 			detectors: [
 			  {
 				detector: "Snowboy",
 				Model: "jarvis",
 				Sensitivity: 0.7
-			  }/*,
+			  },
+			  /*{
+				detector: "Snowboy",
+				Model: "smart_mirror",
+				Sensitivity: 0.5
+			  },
 			  {
 				detector: "Porcupine",
 				Model: "ok google",
@@ -114,8 +122,8 @@ let config = {
 			  },
 			  {
 				detector: "Porcupine",
-				Model: "hey google",
-				Sensitivity: null
+				Model: "Magic Mirror",
+				Sensitivity: 0.7
 			  }*/
 			]
 		  }
@@ -133,7 +141,7 @@ let config = {
 		},
 		{
 			module: "weather",
-			position: "top_rightt",
+			position: "top_right",
 			config: {
 			  // See 'Configuration options' for more information.
 			  weatherProvider: "envcanada",
@@ -147,6 +155,153 @@ let config = {
 			  location: 'Oshawa, ON'
 			}
 		 },
+		 {
+		  module: 'EXT-Spotify',
+		  position: 'top_left',
+		  animateIn: "flipInX",
+		  animateOut: "flipOutX",
+		  config: {
+			updateInterval: 1000,
+			idleInterval: 10000,
+			useBottomBar: false,
+			CLIENT_ID: "2fda49dd5d3946da88d07e53f40c8d9c",
+			CLIENT_SECRET: "04111eb3e9344953ba2322f993eeaf13",
+			mini: true,
+			forceSCL: false,
+			noCanvas: false
+		  }
+		},
+		{
+		  module: 'EXT-Librespot',
+		  config: {
+			debug: false,
+			email: "hbrooksd@gmail.com",
+			password: "Damani49zz22",
+			deviceName: "MagicMirror",
+			minVolume: 40,
+			maxVolume: 100
+		  }
+		},
+		
+		{
+			module: 'EXT-SpotifyCanvasLyrics'
+		},
+		{
+		  module: "MMM-GoogleTTS", // no `position` is needed.
+		  config: {}
+		},	
+		{
+			module: 'gotransit',
+			position: 'bottom_bar',    // This can be any of the regions.
+			config: {
+				// See 'Configuration options' for more information.
+				line: 'LE'
+			}
+		},
+		{
+		  module: 'EXT-Selfies',
+		  position: 'top_left',
+		  config: {
+			debug: false,
+			captureWidth:1280,
+			captureHeight:720,
+			device: null,
+			usePreview: true,
+			previewWidth:640,
+			previewHeight:360,
+			displayButton: true,
+			buttonStyle: 0,
+			buttons: {
+			  1: "master.png",
+			  2: "halloween.png",
+			  3: "birthday.png",
+			  4: "christmas.png"
+			},
+			blinkButton: false,
+			playShutter: true,
+			resultDuration: 1000 * 10,
+			autoValidate: true,
+			counterStyle: 0,
+			showResult: true
+		  }
+		},
+		{
+		  module: 'EXT-SelfiesViewer',
+		  position: 'top_left',
+		  config: {
+			debug: false,
+			moduleWidth: 300,
+			moduleHeight: 250,
+			displayDelay: 1000 * 10,
+			displayBackground: true,
+			sortBy: "new" // old or random
+		  }
+		},
+		{
+		  module: 'EXT-Motion',
+		  config: {
+			debug: false,
+			captureIntervalTime: 1000,
+			scoreThreshold: 100,
+			deviceId: null
+		  }
+		},
+		{
+		  module: 'EXT-Screen',
+		  position: 'top_left',
+		  animateIn: "flipInX",
+		  animateOut: "flipOutX",
+		  config: {
+			debug: false,
+			animateBody: true,
+			autoDimmer: true,
+			delay: 1 * 60 * 1000,
+			mode: 1,
+			xrandrForceRotation: "normal",
+			wrandrForceRotation: "normal",
+			wrandrForceMode: null,
+			displayCounter: false,
+			displayBar: true,
+			displayStyle: "Text",
+			displayLastPresence: false,
+			lastPresenceTimeFormat: "LL H:mm",
+			displayAvailability: false,
+			detectorSleeping: false,
+			gpio: 20,
+			clearGpioValue: true,
+			sound: false,
+			touchMode: 0,
+			ON: [],
+			OFF: []
+		  }
+		},
+		{
+			module: 'MMM-EmbedYoutube', // Path to youtube module from modules folder Exmaple: MagicMirror/modules/custom/MMM-EmbedYoutube/ so it's custom/MMM-EmbedYoutube
+			position: 'bottom_right', // This can be any of the regions.
+			config: {
+			  // See 'Configuration options' in README.md for more information.
+			  video_id: 'xVWeRnStdSA',
+			  video_list: [
+				"KtHgi1MgIes",
+				"JnebIOdlgA",
+				],
+			  loop: true,
+			}
+		 },
+		 {
+			 module: 'MMM-Cursor',
+			 config: {
+			}
+		 }, 
+		 {
+			  module: "MMM-AVStock",
+			  position: "top_right",
+			  config: {
+				symbols : ["GOOGL", "TSLA", "VEQT.TO","TD.TO"], //GOOGL
+				alias: ["GOOGLE", "TESLA", "VANGUARD", "TDBANK"],
+			}
+		 },
+			 
         /*{
             module: 'MMM-XKCD',
             position: 'upper_third',
@@ -307,3 +462,4 @@ let config = {
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
 if (typeof module !== "undefined") {module.exports = config;}
+
